@@ -12,9 +12,11 @@ public class Action {
     /**
      * Generates and returns a new Node, using given algorithm
      *
+     * @param parentNode
+     * @return
      * @Overridable
      */
-    public Node run(boolean isPlayer, Node parentNode) {
+    public Node run(Node parentNode) {
         throw new UnsupportedOperationException("run() is not defined for " + this + "!");
     }
 }

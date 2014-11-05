@@ -6,23 +6,29 @@ public class Search {
 
     private ArrayList<Node> frontierList;
 
-    public ArrayList<Action> BFS(Node originNode) {
+    public ArrayList<Action> BFS(Node originNode, ArrayList<Action> agentActions) {
         frontierList.add(originNode);
-        for (Node node : frontierList) {
-            if (findWinner(node)) {
-                return findPath(node);
-            } else {
-                frontierList.addAll(genStates(node));
+        for (Node parent : frontierList) {
+            for (Node child : genStates(parent, agentActions)) {
+                if (isWinState(child)) {
+                    return findPath(child);
+                } else {
+                    frontierList.add(child);
+                }
             }
         }
         return null;
     }
 
-    private ArrayList<Node> genStates(Node node) {
-        return null;
+    private ArrayList<Node> genStates(Node parent, ArrayList<Action> agentActions) {
+        ArrayList<Node> returnArrayList = new ArrayList<>();
+        for (Action action : agentActions) {
+            returnArrayList.add(action.run(parent));
+        }
+        return returnArrayList;
     }
 
-    private boolean findWinner(Node node) {
+    private boolean isWinState(Node node) {
         return true;
     }
 
